@@ -1,11 +1,11 @@
 /*
  ============================================================================
  Name        : Ext_Interrupt.h
- Author      : Raneem Khaled
+ Author      : Muhamed Reda
  Layer		 : MCAL
- Target		 : ATMEGA32
+ Target		 : ATMEGA16-32
  Version     : 1.0
- Date		 : 16/07/2021
+ Date		 : 25/10/2019
  Copyright   : This is an open source code for all embedded systems students
  Description : Header file for External interrupts Driver
  ============================================================================

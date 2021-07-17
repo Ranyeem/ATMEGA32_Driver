@@ -1,11 +1,11 @@
 /*
  ============================================================================
  Name        : Ext_Interrupt.c
- Author      : Raneem Khaled
+ Author      : Muhamed reda
  Layer		 : MCAL
- Target		 : ATMEGA32
+ Target		 : ATMEGA16-32
  Version     : 1.0
- Date		 : 16/07/2021
+ Date		 : 25/10/2019
  Copyright   : This is an open source code for all embedded systems students
  Description : Source code of External interrupts Driver
  ============================================================================
@@ -74,60 +74,61 @@ StdReturn extInt0_callback(void (*func_ptr)(void)) {
 	return E_OK;
 }
 
-//Initialize external interrupt 1
+// Implement the rest of the functions form Ext_Interrupt.h
 StdReturn extInt1_init(extInt_senseControl senseLevel) {
 	StdReturn return_Loc = E_OK;
 
-	//Enable external interrupt 1 mask
+
 	SET_BIT(GICR, INT1);
 
-	//Configure sense control
+
 	switch (senseLevel) {
 	case EXTINT_RISING_EDGE:
-		SET_BIT(MCUCR, ISC11);
-		SET_BIT(MCUCR, ISC10);
+		SET_BIT(MCUCR, ISC01);
+		SET_BIT(MCUCR, ISC00);
 		break;
 	case EXTINT_FALLING_EDGE:
-		SET_BIT(MCUCR, ISC11);
-		CLEAR_BIT(MCUCR, ISC10);
+		SET_BIT(MCUCR, ISC01);
+		CLEAR_BIT(MCUCR, ISC00);
 		break;
 	default:
 		return_Loc = E_NOK;
 		break;
 	}
+
 	return return_Loc;
 }
 
-//Set the user function to be executed on ISR
-StdReturn extInt1_callback(void (*func_ptr)(void)) {
-	user_func1 = func_ptr;
+StdReturn extInt2_callback(void (*func_ptr)(void)) {
+	user_func0 = func_ptr;
 	return E_OK;
 }
-
-//Initialize external interrupt 2
 StdReturn extInt2_init(extInt_senseControl senseLevel) {
 	StdReturn return_Loc = E_OK;
 
-	//Enable external interrupt 2 mask
-	SET_BIT(GICR, INT2);
 
-	//Configure sense control
+	SET_BIT(GICR, INT1);
+
+
 	switch (senseLevel) {
 	case EXTINT_RISING_EDGE:
-		SET_BIT(MCUCSR, ISC2);
+		SET_BIT(MCUCR, ISC01);
+		SET_BIT(MCUCR, ISC00);
 		break;
 	case EXTINT_FALLING_EDGE:
-		CLEAR_BIT(MCUCSR, ISC2);
+		SET_BIT(MCUCR, ISC01);
+		CLEAR_BIT(MCUCR, ISC00);
 		break;
 	default:
 		return_Loc = E_NOK;
 		break;
 	}
+
 	return return_Loc;
 }
 
-//Set the user function to be executed on ISR
 StdReturn extInt2_callback(void (*func_ptr)(void)) {
-	user_func2 = func_ptr;
+	user_func0 = func_ptr;
 	return E_OK;
 }
+

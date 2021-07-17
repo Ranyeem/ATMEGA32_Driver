@@ -1,11 +1,11 @@
 /*
  ============================================================================
  Name        : GPIO.c
- Author      : Muhamed Reda
+ Author      : Raneem Khaled 
  Layer		 : MCAL
  Target		 : ATMEGA16
  Version     : 1.0
- Date		 : 20/09/2019
+ Date		 : 17/07/2021
  Copyright   : This is an open source code for all embedded systems students
  Description : GPIO Driver
  ============================================================================
@@ -253,6 +253,8 @@ else {
 
 }
 }
+ return E_OK;
+}
 /* Brief:	enable internal pull up resistor of a specific DIO pin
  * Details:	This API is used to enable the internal pull up resistor in specific pin of DIO
  * Input:	port	-Port name
@@ -264,62 +266,58 @@ else {
  */
 StdReturn GPIO_enablePullup(GPIO_port port, uint8 pin, GPIO_pullupEnable state) {
 
-if (pin>MAX_PIN_NUMBER){
-	return E_NOK ;
+	 if (pin > MAX_PIN_NUMBER)
+	 {
+	        return E_NOK;
+	  }
+	 else {
+	        switch (port) {
+	        case GPIO_PORTA:
+	            switch (state) {
+	            case GPIO_PULLUP_DISABLE:
+	                CLEAR_BIT(PORTA, pin);
+	                break;
+	            case GPIO_PULLUP_ENABLE:
+	                SET_BIT(PORTA, pin);
+	                break;
+	            }
+	            break;
+	        case GPIO_PORTB:
+	            switch (state) {
+	            case GPIO_PULLUP_DISABLE:
+	                CLEAR_BIT(PORTB, pin);
+	                break;
+	            case GPIO_PULLUP_ENABLE:
+	                SET_BIT(PORTB, pin);
+	                break;
+	            }
+	            break;
+	        case GPIO_PORTC:
+	            switch (state) {
+	            case GPIO_PULLUP_DISABLE:
+	                CLEAR_BIT(PORTC, pin);
+	                break;
+	            case GPIO_PULLUP_ENABLE:
+	                SET_BIT(PORTC, pin);
+	                break;
+	            }
+	            break;
+	        case GPIO_PORTD:
+	            switch (state) {
+	            case GPIO_PULLUP_DISABLE:
+	                CLEAR_BIT(PORTD, pin);
+	                break;
+	            case GPIO_PULLUP_ENABLE:
+	                SET_BIT(PORTD, pin);
+	                break;
+	            }
+	            break;
 
-}
-else {
-	switch(port)
-	{
+	        default:
+	            return E_NOK;
+	        }
+	    }
 
-	case GPIO_PORTA:
-		switch (state){
-	case GPIO_PULLUP_DISABLE:
-		CLEAR_BIT(PORTA,pin);
-	break;
-	case GPIO_PULLUP_ENABLE:
-		SET_BIT(PORTA,pin);
-	break;
-		default:
-			return E_NOK;
-		}
-		break;
-	case GPIO_PORTB:
-	 switch (state){
-	 case GPIO_PULLUP_DISABLE:
-				CLEAR_BIT(PORTB,pin);
-			break;
-			case GPIO_PULLUP_ENABLE:
-				SET_BIT(PORTB,pin);
-			break;
-				default:
-					return E_NOK;
-	 }
-				break;
-		case GPIO_PORTC:
-		 switch (state){
-		 case GPIO_PULLUP_DISABLE:
-					CLEAR_BIT(PORTC,pin);
-				break;
-				case GPIO_PULLUP_ENABLE:
-					SET_BIT(PORTC,pin);
-				break;
-					default:
-						return E_NOK;
-}
-		 break;
-		 case GPIO_PORTD:
-		  switch (state){
-		 case GPIO_PULLUP_DISABLE:
-			 CLEAR_BIT(PORTD,pin);
-				break;
-		case GPIO_PULLUP_ENABLE:
-			SET_BIT(PORTD,pin);
-				break;
-				   default:
-						return E_NOK;
-     			break;
-}
-
+	    return E_OK;
 	}
 
