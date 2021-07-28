@@ -1,11 +1,11 @@
 /*
  ============================================================================
  Name        : Ext_Interrupt.c
- Author      : Muhamed reda
+ Author      : Raneem Khaled
  Layer		 : MCAL
  Target		 : ATMEGA16-32
  Version     : 1.0
- Date		 : 25/10/2019
+ Date		 : 28/07/2021
  Copyright   : This is an open source code for all embedded systems students
  Description : Source code of External interrupts Driver
  ============================================================================
@@ -99,15 +99,15 @@ StdReturn extInt1_init(extInt_senseControl senseLevel) {
 	return return_Loc;
 }
 
-StdReturn extInt2_callback(void (*func_ptr)(void)) {
-	user_func0 = func_ptr;
+StdReturn extInt1_callback(void (*func_ptr)(void)) {
+	user_func1 = func_ptr;
 	return E_OK;
 }
 StdReturn extInt2_init(extInt_senseControl senseLevel) {
 	StdReturn return_Loc = E_OK;
 
 
-	SET_BIT(GICR, INT1);
+	SET_BIT(GICR, INT2);
 
 
 	switch (senseLevel) {
@@ -128,7 +128,7 @@ StdReturn extInt2_init(extInt_senseControl senseLevel) {
 }
 
 StdReturn extInt2_callback(void (*func_ptr)(void)) {
-	user_func0 = func_ptr;
+	user_func2 = func_ptr;
 	return E_OK;
 }
 
