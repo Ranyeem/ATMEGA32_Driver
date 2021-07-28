@@ -1,12 +1,12 @@
 /*
  ============================================================================
  Name        : interrupts.h
- Author      : Muhamed Reda
+ Author      : Raneem Khaled
 
  Layer		 : MCAL
  Target		 : ATMEGA32
  Version     : 1.0
- Date		 : 12/11/2019
+ Date		 : 16/07/2021
  Copyright   : This is an open source code for all embedded systems students
  Description : Header file for interrupt's vector definition
  ============================================================================
